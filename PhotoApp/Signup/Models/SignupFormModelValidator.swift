@@ -9,7 +9,7 @@
 import Foundation
 
 
-class SignupFormModelValidator {
+class SignupFormModelValidator: SignupFormModelValidatorProtocol {
     
     func isFirstNameValid(firstName: String) -> Bool {
         var returnValue = true
@@ -47,6 +47,10 @@ class SignupFormModelValidator {
         }
         
         return returnValue
+    }
+    
+    func doPasswordMatch(password: String, repeatPassword: String) -> Bool {
+        return password == repeatPassword
     }
     
 }
