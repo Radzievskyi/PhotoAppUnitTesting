@@ -22,9 +22,22 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        #if DEBUG
+        if CommandLine.arguments.contains("-testCommand") {
+            print("testCommand is enabled")
+        }
+        
+        if ProcessInfo.processInfo.arguments.contains("-debugTest") {
+            print("debugTest is enabled")
+        }
+        #endif
+        
         if signupPresenter == nil {
             let signupModelValidator = SignupFormModelValidator()
-            let webService = SignupWebService(urlString: SignupConstants.signupURLString)
+            
+            let signupUrl = ProcessInfo.processInfo.environment["signupUrl"] ?? SignupConstants.signupURLString
+            
+            let webService = SignupWebService(urlString: signupUrl)
             
             signupPresenter = SignupPresenter(formModelValidator: signupModelValidator, webService: webService, delegate: self)
         }

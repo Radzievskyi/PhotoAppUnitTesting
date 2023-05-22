@@ -22,6 +22,8 @@ final class SignupFlowUITests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         try super.setUpWithError()
         app = XCUIApplication()
+        app.launchArguments = ["-testCommand", "-debugTest"]
+        app.launchEnvironment = ["signupUrl": "https://test.server.com/example/api", "inAppPurchasesEnabled": "true", "inAppAdsEnabled": "true"]
         app.launch()
         
         firstName = app.textFields["firstNameTextField"]
